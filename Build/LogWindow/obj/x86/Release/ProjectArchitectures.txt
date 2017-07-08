@@ -1,0 +1,4 @@
+D:\Documents\HOLO\Unity\LogWindow\Build\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj;x86
+D:\Documents\HOLO\Unity\LogWindow\Build\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj;x86
+D:\Documents\HOLO\Unity\LogWindow\Build\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj;x86
+D:\Documents\HOLO\Unity\LogWindow\Build\LogWindow\LogWindow.csproj;x86
