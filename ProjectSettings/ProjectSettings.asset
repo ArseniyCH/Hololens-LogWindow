@@ -587,11 +587,12 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
-  cloudProjectId: 20b6d929-c338-4ede-8065-16f9030ca30d
+  cloudProjectId: 0c291756-6bf9-4753-b5c1-b300a34a17e6
   projectName: LogWindow
-  organizationId: arseniychurin-gmail-com
+  organizationId: kholtanos
   cloudEnabled: 0
   enableNewInputSystem: 0

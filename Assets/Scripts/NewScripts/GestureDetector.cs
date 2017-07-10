@@ -16,8 +16,10 @@ public class GestureDetector : Singleton<GestureDetector> {
     public Vector3 StartManipulationPosition { get; private set; }
     public Vector3 ManipulationPosition { get; private set; }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         NavigationRecognizer = new GestureRecognizer();
         NavigationRecognizer.SetRecognizableGestures(
             GestureSettings.Tap |
@@ -32,6 +34,7 @@ public class GestureDetector : Singleton<GestureDetector> {
         ManipulationRecognizer = new GestureRecognizer();
         ManipulationRecognizer.SetRecognizableGestures(
             GestureSettings.ManipulationTranslate);
+        ManipulationRecognizer.TappedEvent += ManipulationRecognizer_TappedEvent;
         ManipulationRecognizer.ManipulationStartedEvent += ManipulationRecognizer_ManipulationStartedEvent;
         ManipulationRecognizer.ManipulationUpdatedEvent += ManipulationRecognizer_ManipulationUpdatedEvent;
         ManipulationRecognizer.ManipulationCompletedEvent += ManipulationRecognizer_ManipulationCompletedEvent;
@@ -40,14 +43,15 @@ public class GestureDetector : Singleton<GestureDetector> {
         ResetGestureRecognizers();
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
         NavigationRecognizer.TappedEvent -= NavigationRecognizer_TappedEvent;
         NavigationRecognizer.NavigationStartedEvent -= NavigationRecognizer_NavigationStartedEvent;
         NavigationRecognizer.NavigationUpdatedEvent -= NavigationRecognizer_NavigationUpdatedEvent;
         NavigationRecognizer.NavigationCompletedEvent -= NavigationRecognizer_NavigationCompletedEvent;
         NavigationRecognizer.NavigationCanceledEvent -= NavigationRecognizer_NavigationCanceledEvent;
-        
+
+        ManipulationRecognizer.TappedEvent -= ManipulationRecognizer_TappedEvent;
         ManipulationRecognizer.ManipulationStartedEvent -= ManipulationRecognizer_ManipulationStartedEvent;
         ManipulationRecognizer.ManipulationUpdatedEvent -= ManipulationRecognizer_ManipulationUpdatedEvent;
         ManipulationRecognizer.ManipulationCompletedEvent -= ManipulationRecognizer_ManipulationCompletedEvent;
@@ -79,6 +83,7 @@ public class GestureDetector : Singleton<GestureDetector> {
 
     private void NavigationRecognizer_NavigationStartedEvent(InteractionSourceKind source, Vector3 relativePosition, Ray ray)
     {
+        GazeDetector.Instance.UpdateFocusedGameObject();
         IsNavigating = true;
         NavigationPosition = relativePosition;
     }
@@ -101,18 +106,23 @@ public class GestureDetector : Singleton<GestureDetector> {
 
     private void ManipulationRecognizer_ManipulationStartedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
-        if (GazeDetector.Instance.HitObject != null)
+        GazeDetector.Instance.UpdateFocusedGameObject();
+
+        if (GazeDetector.Instance.HitObject == null)
         {
+            Debug.Log("GazeDetector can't find an object");
+            return;
+        }
             IsManipulating = true;
             StartManipulationPosition = GazeDetector.Instance.HitObject != null ? GazeDetector.Instance.HitObject.transform.position : Vector3.zero;
             ManipulationPosition = StartManipulationPosition + position;
-        }
     }
 
     private void ManipulationRecognizer_ManipulationUpdatedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
         if (GazeDetector.Instance.HitObject != null)
         {
+            Debug.Log("Selected object has begun moving");
             IsManipulating = true;
             ManipulationPosition = StartManipulationPosition + position;
         }
@@ -120,18 +130,35 @@ public class GestureDetector : Singleton<GestureDetector> {
 
     private void ManipulationRecognizer_ManipulationCompletedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
+        Debug.Log("Selected object has stopped moving");
         IsManipulating = false;
     }
 
     private void ManipulationRecognizer_ManipulationCanceledEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
+        Debug.Log("Selected object has stopped moving");
         IsManipulating = false;
     }
 
     private void NavigationRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray ray)
     {
+        IsNavigating = true;
+
+        GazeDetector.Instance.UpdateFocusedGameObject();
+
         GameObject focusedObject = GazeDetector.Instance.HitObject;
 
-        if (focusedObject != null)Debug.Log("OnSelect");
+        if (focusedObject != null)Debug.Log("Selected object is going to be navigated");
+    }
+
+    private void ManipulationRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray ray)
+    {
+        IsManipulating = true;
+
+        GazeDetector.Instance.UpdateFocusedGameObject();
+
+        GameObject focusedObject = GazeDetector.Instance.HitObject;
+
+        if (focusedObject != null) Debug.Log("Selected object is going to be manipulated");
     }
 }

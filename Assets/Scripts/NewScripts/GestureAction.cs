@@ -7,21 +7,31 @@ public class GestureAction : MonoBehaviour {
 
     private Vector3 startPosition;
 
-    private void PerfomManipulation()
+    private void PerfomAction()
     {
-        if (GestureDetector.Instance.IsManipulating &&
-            GazeDetector.Instance.HitObject == gameObject)
+        if(GazeDetector.Instance.HitObject == null)
+        {
+            //Debug.Log("There is no object to act with.");
+            return;
+        }
 
-            gameObject.transform.position = GestureDetector.Instance.ManipulationPosition;
+        Debug.Log("Perfoming action with " + GazeDetector.Instance.HitObject.name);
+
+        if (GestureDetector.Instance.IsManipulating)
+            PerfomManipulation();
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
+    private void PerfomManipulation()
+    {
+        if (GazeDetector.Instance.HitObject == gameObject)
+        {
+            Debug.Log("Perfoming manipulation with " + GazeDetector.Instance.HitObject.name);
+            gameObject.transform.position = GestureDetector.Instance.ManipulationPosition;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        PerfomManipulation();
+        PerfomAction();
 	}
 }

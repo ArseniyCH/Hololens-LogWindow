@@ -11,7 +11,7 @@ public class LogWindowScript : MonoBehaviour
 
     private void ApplicationOnLogMessageReceived(string condition, string stackTrace, LogType type)
     {
-        gameObject.GetComponent<Text>().text += condition;
+        gameObject.GetComponent<Text>().text += (condition + "\n");
     }
 
     // Use this for initialization
