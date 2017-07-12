@@ -8,7 +8,7 @@ public class GazeDetector : Singleton<GazeDetector>
     public delegate void FocusedChangedDelegate(GameObject previousObject, GameObject newObject);
     public event FocusedChangedDelegate FocusedObjectChanged;
 
-    private float MaxGazeCollisionDistance = 20.0f;
+    private float MaxGazeCollisionDistance = 10.0f;
 
     private RaycastHit hitInfo;
     public RaycastHit HitInfo
@@ -42,10 +42,7 @@ public class GazeDetector : Singleton<GazeDetector>
     // Use this for initialization
     private void Start()
     {
-        FocusedObjectChanged += (a, b) => {
-            a = b;
-            Debug.Log("Focused object changed");
-        };
+        FocusedObjectChanged += (a, b) => { Debug.Log("Focused object changed"); };
 
         if (GazeTransform == null)
             if (Camera.main != null)
@@ -63,15 +60,12 @@ public class GazeDetector : Singleton<GazeDetector>
         }
 
         UpdateGazeInfo();
-    }
-
-    public void UpdateFocusedGameObject()
-    {
+        
         GameObject previousFocusObject = RayCastPhysics();
-
+        
         if (EventSystem.current != null)
             RayCastUnityUI();
-
+        
         if (previousFocusObject != HitObject && FocusedObjectChanged != null)
             FocusedObjectChanged(previousFocusObject, HitObject);
     }
@@ -85,30 +79,17 @@ public class GazeDetector : Singleton<GazeDetector>
     private GameObject RayCastPhysics()
     {
         GameObject previousFocusObject = HitObject;
-        RaycastHit? hit = null;
 
         // If there is only one priority, don't prioritize
         if (RaycastLayerMasks.Length == 1)
-        {
-            Debug.Log("One physics priority. Raycasting All");
-            RaycastHit[] hits = Physics.RaycastAll(new Ray(GazeOrigin, GazeNormal), MaxGazeCollisionDistance, RaycastLayerMasks[0]);
-            if (hits.Length != 0)
-                hit = hits[0];
-        }
-        //Physics.Raycast(GazeOrigin, GazeNormal, out hitInfo, MaxGazeCollisionDistance, RaycastLayerMasks[0]);
+            IsGazingAtObject = Physics.Raycast(GazeOrigin, GazeNormal, out hitInfo, MaxGazeCollisionDistance, RaycastLayerMasks[0]);
         else
         {
-            Debug.Log("Few physics priority. Raycasting All");
             // Raycast across all layers and prioritize
-            hit = PrioritizeHits(Physics.RaycastAll(new Ray(GazeOrigin, GazeNormal), MaxGazeCollisionDistance, -1));
-        }
-
-        Debug.Log("Raycast finished");
-
-        if (hit != null && (IsGazingAtObject = hit.HasValue))
-        {
-            Debug.Log("Gazing at object cause it was detected");
-            hitInfo = hit.Value;
+            RaycastHit? hit = PrioritizeHits(Physics.RaycastAll(new Ray(GazeOrigin, GazeNormal), MaxGazeCollisionDistance, -1));
+            
+            if (IsGazingAtObject = hit.HasValue)
+                hitInfo = hit.Value;
         }
 
         if (IsGazingAtObject)
@@ -120,7 +101,6 @@ public class GazeDetector : Singleton<GazeDetector>
         }
         else
         {
-            Debug.Log("Physics object has not been detected!");
             HitObject = null;
             HitPosition = GazeOrigin + (GazeNormal * LastHitDistance);
         }
@@ -132,7 +112,6 @@ public class GazeDetector : Singleton<GazeDetector>
     {
         if (UnityUIPointerEvent == null)
         {
-            Debug.Log("Creating new PointerEventData");
             UnityUIPointerEvent = new PointerEventData(EventSystem.current);
         }
 
@@ -143,7 +122,6 @@ public class GazeDetector : Singleton<GazeDetector>
 
         // Graphics raycast
         rayCastResults.Clear();
-        Debug.Log("Raycasting all UI");
         EventSystem.current.RaycastAll(UnityUIPointerEvent, rayCastResults);
         RaycastResult uiRaycastResult = FindClosestRaycastHitInLayermasks(rayCastResults, RaycastLayerMasks);
         UnityUIPointerEvent.pointerCurrentRaycast = uiRaycastResult;
@@ -151,15 +129,12 @@ public class GazeDetector : Singleton<GazeDetector>
         // If we have a raycast result, check if we need to overwrite the 3D raycast info
         if (uiRaycastResult.gameObject != null)
         {
-            Debug.Log("uiRaycastResult.gameObject != null");
-
             // Add the near clip distance since this is where the raycast is from
             float uiRaycastDistance = uiRaycastResult.distance + Camera.main.nearClipPlane;
 
             bool superseded3DObject = false;
             if (IsGazingAtObject)
             {
-                Debug.Log("IsGazingAtObject = true");
                 // Check layer prioritization
                 if (RaycastLayerMasks.Length > 1)
                 {

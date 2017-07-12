@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Input = UnityEngine.VR.WSA.Input;
+using HoloToolkit.Unity.InputModule;
 
 public class GestureAction : MonoBehaviour {
 
@@ -9,27 +10,32 @@ public class GestureAction : MonoBehaviour {
 
     private void PerfomAction()
     {
-        if(GazeDetector.Instance.HitObject == null)
-        {
-            //Debug.Log("There is no object to act with.");
+        if (GestureDetector.Instance.CurrentGameObject == null)
             return;
-        }
-
-        Debug.Log("Perfoming action with " + GazeDetector.Instance.HitObject.name);
 
         if (GestureDetector.Instance.IsManipulating)
             PerfomManipulation();
     }
 
-    private void PerfomManipulation()
+     private void PerfomManipulation()
     {
-        if (GazeDetector.Instance.HitObject == gameObject)
+        GameObject currentGameObject = GestureDetector.Instance.CurrentGameObject;
+
+        if (currentGameObject.name == "DragPanel")
+            currentGameObject = currentGameObject.transform.parent.gameObject.transform.parent.gameObject;
+
+        if (currentGameObject == gameObject)
         {
-            Debug.Log("Perfoming manipulation with " + GazeDetector.Instance.HitObject.name);
-            gameObject.transform.position = GestureDetector.Instance.ManipulationPosition;
+            //Debug.Log("Manipulating wtih " + currentGameObject.name + " == " + gameObject.name);
+            gameObject.transform.position += GestureDetector.Instance.DeltaManipulation;
         }
     }
-	
+
+    // Use this for initialization
+    void Start () {
+        Debug.Log("GestureAction started for " + gameObject.name);
+	}
+	 
 	// Update is called once per frame
 	void Update () {
         PerfomAction();

@@ -1917,21 +1917,6 @@
             "rid": "win8-aot"
           }
         }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -3707,21 +3692,6 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -5459,21 +5429,6 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
-        }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
         }
       }
     },
@@ -7257,21 +7212,6 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -9009,21 +8949,6 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
-        }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
         }
       }
     },
@@ -10807,21 +10732,6 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -12559,21 +12469,6 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
-        }
-      },
-      "Assembly-CSharp/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Assembly-CSharp-firstpass": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
-        }
-      },
-      "Assembly-CSharp-firstpass/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
         }
       }
     }
@@ -15867,16 +15762,6 @@
         "runtime.json",
         "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
-    },
-    "Assembly-CSharp/1.0.0": {
-      "type": "project",
-      "path": "../GeneratedProjects/UWP/Assembly-CSharp/project.json",
-      "msbuildProject": "../GeneratedProjects/UWP/Assembly-CSharp/Assembly-CSharp.csproj"
-    },
-    "Assembly-CSharp-firstpass/1.0.0": {
-      "type": "project",
-      "path": "../GeneratedProjects/UWP/Assembly-CSharp-firstpass/project.json",
-      "msbuildProject": "../GeneratedProjects/UWP/Assembly-CSharp-firstpass/Assembly-CSharp-firstpass.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -15889,27 +15774,15 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Сергей\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\LogWindow\\LogWindow.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Hololens-LogWindow\\Build\\LogWindow\\LogWindow.csproj",
       "projectName": "LogWindow",
-      "projectPath": "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\LogWindow\\LogWindow.csproj",
-      "projectJsonPath": "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\LogWindow\\project.json",
-      "projectStyle": "ProjectJson",
-      "frameworks": {
-        "uap10.0": {
-          "projectReferences": {
-            "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj": {
-              "projectPath": "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\GeneratedProjects\\UWP\\Assembly-CSharp\\Assembly-CSharp.csproj"
-            },
-            "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\GeneratedProjects\\UWP\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj": {
-              "projectPath": "D:\\Documents\\HOLO\\Unity\\LogWindow\\Build\\GeneratedProjects\\UWP\\Assembly-CSharp-firstpass\\Assembly-CSharp-firstpass.csproj"
-            }
-          }
-        }
-      }
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Hololens-LogWindow\\Build\\LogWindow\\LogWindow.csproj",
+      "projectJsonPath": "C:\\Users\\User\\Documents\\GitHub\\Hololens-LogWindow\\Build\\LogWindow\\project.json",
+      "projectStyle": "ProjectJson"
     },
     "dependencies": {
       "Microsoft.ApplicationInsights": "1.0.0",
