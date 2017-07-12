@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR.WSA.Input;
+using HoloToolkit.Unity.InputModule;
 
 public class GestureDetector : Singleton<GestureDetector> {
+
+    public GameObject CurrentGameObject { get; private set; }
 
     public GestureRecognizer NavigationRecognizer { get; private set; }
     public GestureRecognizer ManipulationRecognizer { get; private set; }
@@ -16,8 +19,10 @@ public class GestureDetector : Singleton<GestureDetector> {
     public Vector3 StartManipulationPosition { get; private set; }
     public Vector3 ManipulationPosition { get; private set; }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         NavigationRecognizer = new GestureRecognizer();
         NavigationRecognizer.SetRecognizableGestures(
             GestureSettings.Tap |
@@ -40,7 +45,7 @@ public class GestureDetector : Singleton<GestureDetector> {
         ResetGestureRecognizers();
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
         NavigationRecognizer.TappedEvent -= NavigationRecognizer_TappedEvent;
         NavigationRecognizer.NavigationStartedEvent -= NavigationRecognizer_NavigationStartedEvent;
@@ -101,37 +106,49 @@ public class GestureDetector : Singleton<GestureDetector> {
 
     private void ManipulationRecognizer_ManipulationStartedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
-        if (GazeDetector.Instance.HitObject != null)
+        Debug.Log("Try: Manipulation started");
+
+        GazeManager.Instance.UpdateFocusedGameObject();
+
+        if (GazeManager.Instance.HitObject != null)
         {
+            Debug.Log("Manipulation started successfuly");
             IsManipulating = true;
-            StartManipulationPosition = GazeDetector.Instance.HitObject != null ? GazeDetector.Instance.HitObject.transform.position : Vector3.zero;
+
+            CurrentGameObject = GazeManager.Instance.HitObject;
+            if (CurrentGameObject.name == "DragPanel")
+                CurrentGameObject = (GameObject)CurrentGameObject.transform.parent.gameObject.transform.parent.gameObject;
+            StartManipulationPosition = GazeManager.Instance.HitObject.transform.position;
+            Debug.Log("Got the " + CurrentGameObject.name);
+           
             ManipulationPosition = StartManipulationPosition + position;
         }
     }
 
     private void ManipulationRecognizer_ManipulationUpdatedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
-        if (GazeDetector.Instance.HitObject != null)
-        {
-            IsManipulating = true;
             ManipulationPosition = StartManipulationPosition + position;
-        }
     }
 
     private void ManipulationRecognizer_ManipulationCompletedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
+        Debug.Log("Manipulation completed");
         IsManipulating = false;
+        CurrentGameObject = null;
     }
 
     private void ManipulationRecognizer_ManipulationCanceledEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
+        Debug.Log("Manipulation canceled");
         IsManipulating = false;
+        CurrentGameObject = null;
     }
 
     private void NavigationRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray ray)
     {
-        GameObject focusedObject = GazeDetector.Instance.HitObject;
+        GameObject focusedObject = GazeManager.Instance.HitObject;
 
         if (focusedObject != null)Debug.Log("OnSelect");
     }
 }
+ 

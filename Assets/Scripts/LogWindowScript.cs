@@ -11,27 +11,12 @@ public class LogWindowScript : MonoBehaviour
 
     private void ApplicationOnLogMessageReceived(string condition, string stackTrace, LogType type)
     {
-        gameObject.GetComponent<Text>().text += condition;
+        gameObject.GetComponent<Text>().text += condition + Environment.NewLine;
     }
 
     // Use this for initialization
     void Start()
     {
         Application.logMessageReceived += ApplicationOnLogMessageReceived;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-
-        this.transform.parent.parent.gameObject.transform.position += eventData.worldPosition;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
- //       RectTransformUtility.ScreenPointToWorldPointInRectangle()
-
-        // Debug.Log("Hallo");
     }
 }
