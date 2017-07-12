@@ -6,13 +6,13 @@
 # Write a line equal to 'keep-all' (without quotes) to keep files regardless their modification (preserved accross builds)
 # Default behavior is to never overwrite files
 LogWindow.sln: modified
-GeneratedProjects\UWP\Assembly-CSharp\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
-GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
+GeneratedProjects\UWP\Assembly-CSharp\project.json: modified
+GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: modified
 LogWindow\App.cs: 6A6C23566A956123F0EE61968D531C5D
-LogWindow\LogWindow.csproj: E399A9DEF8B004BABBA00175FD026F51
+LogWindow\LogWindow.csproj: modified
 LogWindow\LogWindow.csproj.user: modified
-LogWindow\Package.appxmanifest: DDDAF3635D36888785C2690D52B5873A
-LogWindow\project.json: 1D02BC64BAC0D041019673A1C4C51737
+LogWindow\Package.appxmanifest: modified
+LogWindow\project.json: modified
 LogWindow\Assets\SplashScreen.scale-200.png: 60618416282ED104FD1473935716045D
 LogWindow\Assets\Square150x150Logo.scale-200.png: E02834B4A5DFB97FF8E212C1CACBB084
 LogWindow\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564953775DE
@@ -20,4 +20,4 @@ LogWindow\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B53
 LogWindow\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 LogWindow\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
 LogWindow\Properties\AssemblyInfo.cs: 60BF3D451BC7748AEC644B7D2106FD27
-LogWindow\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
+LogWindow\Properties\Default.rd.xml: modified

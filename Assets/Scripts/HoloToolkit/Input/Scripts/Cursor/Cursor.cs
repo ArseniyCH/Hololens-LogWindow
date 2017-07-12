@@ -371,7 +371,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <param name="eventData"></param>
         public virtual void OnInputDown(InputEventData eventData)
         {
-            Debug.Log("OnInputDown");
+            //Debug.Log("OnInputDown");
             IsInputSourceDown = true;
         }
 

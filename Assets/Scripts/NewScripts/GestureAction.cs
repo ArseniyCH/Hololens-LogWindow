@@ -23,7 +23,7 @@ public class GestureAction : MonoBehaviour {
 
         if (currentGameObject == gameObject)
         {
-            Debug.Log("Manipulating wtih " + currentGameObject.name);
+            Debug.Log("Manipulating wtih " + currentGameObject.name + " == " + gameObject.name);
             gameObject.transform.position = GestureDetector.Instance.ManipulationPosition;
         }
     }
