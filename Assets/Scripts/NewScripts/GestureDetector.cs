@@ -6,6 +6,8 @@ using HoloToolkit.Unity.InputModule;
 
 public class GestureDetector : Singleton<GestureDetector> {
 
+    private float sensivity = 5.0f;
+
     public GameObject CurrentGameObject { get; private set; }
 
     public GestureRecognizer NavigationRecognizer { get; private set; }
@@ -118,14 +120,15 @@ public class GestureDetector : Singleton<GestureDetector> {
             CurrentGameObject = GazeManager.Instance.HitObject;
             StartManipulationPosition = position;
             Debug.Log("Got the " + CurrentGameObject.name);
-            DeltaManipulation = position - StartManipulationPosition;
+            DeltaManipulation = sensivity * (position - StartManipulationPosition);
         }
     }
 
     private void ManipulationRecognizer_ManipulationUpdatedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
     {
         IsManipulating = true;
-        DeltaManipulation = position - StartManipulationPosition;
+        DeltaManipulation = sensivity * (position - StartManipulationPosition);
+        StartManipulationPosition = position;
     }
 
     private void ManipulationRecognizer_ManipulationCompletedEvent(InteractionSourceKind source, Vector3 position, Ray ray)
